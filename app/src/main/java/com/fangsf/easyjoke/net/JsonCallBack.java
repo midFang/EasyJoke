@@ -10,21 +10,21 @@ import java.util.Map;
  * Created by fangsfmac on 2018/6/15.
  */
 
-public abstract class HttpCallBack<T> implements IHttpCallBack {
+public abstract class JsonCallBack<T> implements IHttpCallBack {
 
     /**
-     * 处理清楚之前的操作
+     * 网络请求前的  操作
      *
      * @param context
      * @param params
      */
     public void onPreExecute(Context context, Map<String, Object> params) {
+        // todo , 请求之前 params 每个请求中可以添加固定参数, 例如deviceID等等, 也可以处理token
 
-
-        onPreExecute(); // todo
+        onPreExecute();
     }
 
-    private void onPreExecute() {
+    public void onPreExecute() {
 
     }
 
@@ -40,6 +40,9 @@ public abstract class HttpCallBack<T> implements IHttpCallBack {
 
     @Override
     public void onError(Exception e) {
+
+
+        //todo 可以 自定义Exception , 处理token 失效
 
     }
 

@@ -6,7 +6,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fangsf.easyjoke.bean.GankIoBean;
-import com.fangsf.easyjoke.net.HttpCallBack;
+import com.fangsf.easyjoke.net.DialogCallBack;
+import com.fangsf.easyjoke.net.JsonCallBack;
 import com.fangsf.easyjoke.net.HttpUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,20 +21,22 @@ public class MainActivity extends AppCompatActivity {
 
         mTextView = findViewById(R.id.tvMes);
 
+//        HttpUtils.with(this).url("http://gank.io/api/history/content/2/1")
+//                .get().execute(new JsonCallBack<GankIoBean>() {
+//            public void onSuccess(GankIoBean o) {
+//                mTextView.setText("" + o.getResults().get(0).getContent());
+//            }
+//        });
+
         HttpUtils.with(this).url("http://gank.io/api/history/content/2/1")
-                .get().execute(new HttpCallBack<GankIoBean>() {
-
-            public void onSuccess(GankIoBean o) {
-                mTextView.setText("" + o.getResults().get(0).getContent());
-            }
-
+                .get().execute(new DialogCallBack<GankIoBean>(this) {
             @Override
-            public void onError(Exception e) {
-                Toast.makeText(MainActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onSuccess(GankIoBean gankIoBean) {
+
+                mTextView.setText(gankIoBean.getResults().get(1).getTitle());
 
             }
         });
-
 
     }
 }
