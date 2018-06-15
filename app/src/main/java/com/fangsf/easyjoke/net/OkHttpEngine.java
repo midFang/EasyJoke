@@ -30,8 +30,8 @@ public class OkHttpEngine implements IHttpEngine {
     @Override
     public void get(Context context, String url, Map<String, Object> params, final IHttpCallBack httpCallBack) {
 
-        // 省略部分代码......
         Request.Builder requestBuilder = new Request.Builder().url(url).tag(context);
+
         Request request = requestBuilder.build();
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -59,13 +59,14 @@ public class OkHttpEngine implements IHttpEngine {
     public void post(Context context, String url, Map<String, Object> params, final IHttpCallBack httpCallBack) {
 
         RequestBody requestBody = appendBody(params);
-        Request request = new Request.Builder()
+
+        Request mPostRequest = new Request.Builder()
                 .url(url)
                 .tag(context)
                 .post(requestBody)
                 .build();
 
-        mOkHttpClient.newCall(request).enqueue(
+        mOkHttpClient.newCall(mPostRequest).enqueue(
                 new Callback() {
                     @Override
                     public void onFailure(Call call, final IOException e) {
@@ -77,10 +78,14 @@ public class OkHttpEngine implements IHttpEngine {
                         String resultJson = response.body().string();
 
                         executeSuccessMethod(httpCallBack, resultJson);
-                        // 缓存处理，下一期我们没事干，自己手写数据库框架
                     }
                 }
         );
+    }
+
+    @Override
+    public void addHeaders(String key, Object value) {
+        // todo 添加头部
     }
 
 

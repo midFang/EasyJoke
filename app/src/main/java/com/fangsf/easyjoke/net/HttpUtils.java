@@ -64,8 +64,10 @@ public class HttpUtils {
     /**
      * 添加头部
      */
-    public void addHead() {
+    public HttpUtils addHeaders(String key, Object value) {
+        mHttpEngine.addHeaders(key, value);
 
+        return this;
     }
 
     /**
