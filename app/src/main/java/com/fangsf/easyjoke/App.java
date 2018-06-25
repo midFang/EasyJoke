@@ -2,8 +2,9 @@ package com.fangsf.easyjoke;
 
 import android.app.Application;
 
-import com.fangsf.easyjoke.net.HttpUtils;
-import com.fangsf.easyjoke.net.OkHttpEngine;
+import com.example.baselibrary.net.HttpUtils;
+import com.example.baselibrary.net.OkHttpEngine;
+import com.google.gson.Gson;
 
 /**
  * Created by fangsfmac on 2018/6/15.

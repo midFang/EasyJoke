@@ -2,14 +2,11 @@ package com.fangsf.easyjoke;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.baselibrary.net.HttpUtils;
+import com.example.framelibrary.net.DialogCallBack;
 import com.fangsf.easyjoke.bean.GankIoBean;
-import com.fangsf.easyjoke.net.DialogCallBack;
-import com.fangsf.easyjoke.net.JsonCallBack;
-import com.fangsf.easyjoke.net.HttpUtils;
 
 public class MainActivity extends AppCompatActivity {
 

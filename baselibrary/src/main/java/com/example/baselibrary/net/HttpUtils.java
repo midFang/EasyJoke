@@ -1,4 +1,4 @@
-package com.fangsf.easyjoke.net;
+package com.example.baselibrary.net;
 
 import android.content.Context;
 import android.os.Handler;
@@ -8,8 +8,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.fangsf.easyjoke.net.IHttpCallBack.DEFAULT_CALLBACK;
 
 /**
  * Created by fangsfmac on 2018/6/15.

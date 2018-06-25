@@ -1,7 +1,6 @@
-package com.fangsf.easyjoke.net;
+package com.example.baselibrary.net;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
