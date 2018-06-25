@@ -14,7 +14,7 @@ public abstract class DialogCallBack<T> extends JsonCallBack<T> {
     private Context mContext;
     private ProgressDialog dialog;
 
-    public DialogCallBack(Context context) {
+    protected DialogCallBack(Context context) {
         mContext = context;
 
         initDialog(context);
@@ -40,6 +40,7 @@ public abstract class DialogCallBack<T> extends JsonCallBack<T> {
 
     @Override
     public void onSuccess(String result) {
+        super.onSuccess(result);
 
         //网络请求结束后关闭对话框
         if (dialog != null && dialog.isShowing()) {

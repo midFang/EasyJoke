@@ -2,6 +2,7 @@ package com.fangsf.easyjoke;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,14 +30,13 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         HttpUtils.with(this).url("http://gank.io/api/history/content/2/1")
-                .get().execute(new DialogCallBack<GankIoBean>(this) {
+                .get().execute(new DialogCallBack<GankIoBean>(MainActivity.this) {
             @Override
             public void onSuccess(GankIoBean gankIoBean) {
-
-                mTextView.setText(gankIoBean.getResults().get(1).getTitle());
-
+                mTextView.setText(gankIoBean.getResults().get(0).getContent());
             }
         });
+
 
     }
 }
