@@ -2,7 +2,9 @@ package com.fangsf.easyjoke;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.baselibrary.net.HttpUtils;
 import com.example.framelibrary.net.DialogCallBack;
@@ -19,21 +21,15 @@ public class MainActivity extends AppCompatActivity {
 
         mTextView = findViewById(R.id.tvMes);
 
-//        HttpUtils.with(this).url("http://gank.io/api/history/content/2/1")
-//                .get().execute(new JsonCallBack<GankIoBean>() {
-//            public void onSuccess(GankIoBean o) {
-//                mTextView.setText("" + o.getResults().get(0).getContent());
-//            }
-//        });
+        int i = 2 / 0;
 
-        HttpUtils.with(this).url("http://gank.io/api/history/content/2/1")
-                .get().execute(new DialogCallBack<GankIoBean>(MainActivity.this) {
+        mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(GankIoBean gankIoBean) {
-                mTextView.setText(gankIoBean.getResults().get(0).getContent());
+            public void onClick(View v) {
+                int i = 2 / 0;
+                Toast.makeText(MainActivity.this, i + "", Toast.LENGTH_SHORT).show();
             }
         });
-
 
     }
 }

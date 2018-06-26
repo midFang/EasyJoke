@@ -2,6 +2,7 @@ package com.fangsf.easyjoke;
 
 import android.app.Application;
 
+import com.example.baselibrary.exception.ExceptionCrashHandler;
 import com.example.baselibrary.net.HttpUtils;
 import com.example.baselibrary.net.OkHttpEngine;
 import com.google.gson.Gson;
@@ -20,5 +21,7 @@ public class App extends Application {
         // 初始化网络引擎
         HttpUtils.init(new OkHttpEngine());
 
+        // 全局异常的捕捉类
+        ExceptionCrashHandler.getInstance().init(this);
     }
 }
