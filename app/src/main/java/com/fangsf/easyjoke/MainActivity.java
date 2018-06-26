@@ -6,9 +6,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.baselibrary.exception.CrashAppHandler;
 import com.example.baselibrary.net.HttpUtils;
 import com.example.framelibrary.net.DialogCallBack;
 import com.fangsf.easyjoke.bean.GankIoBean;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,15 +24,16 @@ public class MainActivity extends AppCompatActivity {
 
         mTextView = findViewById(R.id.tvMes);
 
-        int i = 2 / 0;
+      int i = 2 / 0;
+//
+//        mTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int i = 2 / 0;
+//                Toast.makeText(MainActivity.this, i + "", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-        mTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int i = 2 / 0;
-                Toast.makeText(MainActivity.this, i + "", Toast.LENGTH_SHORT).show();
-            }
-        });
 
     }
 }

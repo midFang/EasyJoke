@@ -1,11 +1,15 @@
 package com.fangsf.easyjoke;
 
 import android.app.Application;
+import android.os.Looper;
+import android.widget.Toast;
 
-import com.example.baselibrary.exception.ExceptionCrashHandler;
+import com.example.baselibrary.exception.CrashAppHandler;
+import com.example.baselibrary.exception.CrashAppLog;
 import com.example.baselibrary.net.HttpUtils;
 import com.example.baselibrary.net.OkHttpEngine;
-import com.google.gson.Gson;
+
+import java.io.File;
 
 /**
  * Created by fangsfmac on 2018/6/15.
@@ -22,6 +26,12 @@ public class App extends Application {
         HttpUtils.init(new OkHttpEngine());
 
         // 全局异常的捕捉类
-        ExceptionCrashHandler.getInstance().init(this);
+        CrashAppHandler.getInstance().init(this);
+        CrashAppHandler.getInstance().setCrashLogListener(new CrashAppHandler.OnCrashLogListener() {
+            @Override
+            public void logInfo(final File folder, File file) {
+                // 可以尝试删除错误信息
+            }
+        });
     }
 }
