@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         mTextView = findViewById(R.id.tvMes);
 
-      int i = 2 / 0;
+        // int i = 2 / 0;
 //
 //        mTextView.setOnClickListener(new View.OnClickListener() {
 //            @Override
