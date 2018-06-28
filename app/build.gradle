@@ -29,4 +29,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation project(':framelibrary')
     implementation project(':baselibrary')
+
+    compile 'com.alipay.euler:andfix:0.5.0@aar'
 }

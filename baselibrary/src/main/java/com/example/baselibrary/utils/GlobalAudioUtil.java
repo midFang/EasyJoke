@@ -8,6 +8,8 @@ import android.util.Log;
 /**
  * Created by fangsf on 2018/6/27.
  * Useful:  解决webview 中,需要停止播放音乐
+ * https://blog.csdn.net/u013478336/article/details/40826673
+ * https://www.cnblogs.com/Free-Thinker/p/6138326.html
  */
 public class GlobalAudioUtil {
 
