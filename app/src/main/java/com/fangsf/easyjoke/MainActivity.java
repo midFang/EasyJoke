@@ -1,24 +1,24 @@
 package com.fangsf.easyjoke;
 
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.baselibrary.exception.CrashAppHandler;
-import com.example.baselibrary.net.HttpUtils;
-import com.example.framelibrary.net.DialogCallBack;
-import com.fangsf.easyjoke.bean.GankIoBean;
+import com.example.baselibrary.ioc.OnClick;
+import com.example.baselibrary.ioc.ViewById;
+import com.example.baselibrary.ioc.ViewUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
+
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
+    @ViewById(R.id.button)
     private Button mButton;
 
     @Override
@@ -26,10 +26,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mButton = findViewById(R.id.tvMes);
+        ViewUtils.bind(this);
 
+        ButterKnife.bind(this);
+
+        initaPatch(); //阿里 热修复
+
+        mButton.setText("viewbyid");
+
+        // int i = 2 / 0;
+    }
+
+    @OnClick(R.id.button)
+    public void testClick(View view) {
+        Toast.makeText(this, "viewByid", Toast.LENGTH_SHORT).show();
+    }
+
+    private void initaPatch() {
         File fixFile = new File(Environment.getExternalStorageDirectory(), "fix.apatch");
-
         if (fixFile.exists()) {
             // 存在 加载差分包
             try {
@@ -40,19 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
-        // int i = 2 / 0;
-//
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int i = 2 / 2;
-                Toast.makeText(MainActivity.this, i + "", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-
     }
 
 }

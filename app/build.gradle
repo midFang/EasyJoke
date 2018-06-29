@@ -30,5 +30,7 @@ dependencies {
     implementation project(':framelibrary')
     implementation project(':baselibrary')
 
-    compile 'com.alipay.euler:andfix:0.5.0@aar'
+    implementation 'com.alipay.euler:andfix:0.5.0@aar'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }
