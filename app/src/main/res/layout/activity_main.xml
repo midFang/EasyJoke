@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context="com.fangsf.easyjoke.MainActivity">
 
+    <com.example.baselibrary.widget.ToolBar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        app:centerText="标题"
+        app:defaultTextColor="#fff"
+        app:defaultTextSize="15sp"
+        app:rightText="右边" />
+
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"

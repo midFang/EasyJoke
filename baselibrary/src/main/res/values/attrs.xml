@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ToolBar" >
+        <attr name="centerText" format="string" />
+        <attr name="rightIcon" format="integer" />
+        <attr name="rightText" format="string" />
+        <attr name="leftIcon" format="integer" />
+        <attr name="leftText" format="string" />
+        <attr name="finishActivity" format="boolean" />
+        <attr name="defaultTextSize" format="dimension" />
+        <attr name="defaultTextColor" format="color" />
+    </declare-styleable>
+
+
+</resources>

@@ -21,6 +21,7 @@ public class ViewUtils {
         inject(new ViewFinder(view), view);
     }
 
+    // 适配fragment Object
     public static void bind(View view, Object object) {
         inject(new ViewFinder(view), object);
     }
@@ -78,7 +79,7 @@ public class ViewUtils {
                 for (int i : value) {
                     View view = finder.findViewById(i);
                     if (view != null) {
-                        view.setOnClickListener(new DeclaredOnClickListener(method, object));
+                        view.setOnClickListener(new DeclaredOnClickListener(method, object)); //模仿view的onClick() 的写法
                     }
                 }
             }
@@ -105,10 +106,10 @@ public class ViewUtils {
             //反射注入方法
             mMethod.setAccessible(true);
             try {
-                mMethod.invoke(mObject, v);
+                mMethod.invoke(mObject, v); //onClick(View v)
             } catch (Exception e) {
                 try {
-                    mMethod.invoke(mObject, null);
+                    mMethod.invoke(mObject, null); //兼容onClick()
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
