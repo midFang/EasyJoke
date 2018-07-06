@@ -63,7 +63,7 @@ public class FixBugManager {
         Field pathListField = BaseDexClassLoader.class.getDeclaredField("pathList");
         pathListField.setAccessible(true);
 
-        Object pathList = pathListField.get(classLoader);
+        Object pathList = pathListField.get(classLoader); // todo .get 获取的是什么
 
         // 获取pathList中的dexElement
         Field dexElementsField = pathList.getClass().getDeclaredField("dexElements");
@@ -159,8 +159,13 @@ public class FixBugManager {
         fixDesFiles(fixDexFiles);
     }
 
+    /**
+     * 加载修复的dex包, 解析成element, 注入
+     * @param fixDexFiles
+     * @throws Exception
+     */
     private void fixDesFiles(List<File> fixDexFiles) throws Exception {
-        //1, 获取当前正在运行的classLoader
+        //1, 获取当前正在运行的classLoader,可以获取到正在运行的element
         ClassLoader applicationClassLoader = mContext.getClassLoader();
 
         //通过反射获取正在运行的dexElement
@@ -189,7 +194,6 @@ public class FixBugManager {
         }
 
         // 注入 applicationDexElement
-
         injectDexElement(applicationClassLoader, applicationDexElement);
     }
 }
