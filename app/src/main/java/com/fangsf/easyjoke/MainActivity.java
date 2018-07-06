@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.PermissionUtils;
+import com.example.baselibrary.fixbug.FixBugManager;
 import com.example.baselibrary.ioc.OnClick;
 import com.example.baselibrary.ioc.ViewById;
 import com.example.baselibrary.ioc.ViewUtils;
@@ -16,7 +18,7 @@ import java.io.IOException;
 
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @ViewById(R.id.button)
     private Button mButton;
@@ -28,17 +30,37 @@ public class MainActivity extends AppCompatActivity {
 
         ViewUtils.bind(this);
 
-        ButterKnife.bind(this);
-
-        initaPatch(); //阿里 热修复
+        // initaPatch(); //阿里 热修复
 
         mButton.setText("viewbyid");
 
+        customFixBug();
+
         // int i = 2 / 0;
+        mButton.setOnClickListener(this);
+    }
+
+    private void customFixBug() {
+
+        File fixFile = new File(Environment.getExternalStorageDirectory(), "fix.dex");
+
+        if (fixFile.exists()) {
+            // 存在 加载差分包
+            try {
+                FixBugManager fixBugManager = new FixBugManager(MainActivity.this);
+                fixBugManager.fixBug(fixFile.getAbsolutePath());
+                Toast.makeText(this, "修复成功", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Toast.makeText(this, "修复失败", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        }
+
     }
 
     @OnClick(R.id.button)
     public void testClick(View view) {
+        // int i = 2 / 0;
         Toast.makeText(this, "viewByid", Toast.LENGTH_SHORT).show();
     }
 
@@ -56,4 +78,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+       int i = 2 / 0;
+        Toast.makeText(this, "bug修复测试", Toast.LENGTH_SHORT).show();
+    }
 }

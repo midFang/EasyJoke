@@ -2,7 +2,6 @@ package com.example.framelibrary.net;
 
 import android.content.Context;
 
-
 import com.example.baselibrary.net.HttpUtils;
 import com.example.baselibrary.net.IHttpCallBack;
 import com.google.gson.Gson;
