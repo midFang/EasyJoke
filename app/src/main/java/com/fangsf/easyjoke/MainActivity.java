@@ -9,10 +9,15 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.PermissionUtils;
+import com.example.baselibrary.commonDialog.BaseAlertDialog;
 import com.example.baselibrary.fixbug.FixBugManager;
 import com.example.baselibrary.ioc.OnClick;
 import com.example.baselibrary.ioc.ViewById;
 import com.example.baselibrary.ioc.ViewUtils;
+import com.example.framelibrary.db.DaoSupport;
+import com.example.framelibrary.db.DaoSupportFactory;
+import com.example.framelibrary.db.IDaoSupport;
+import com.fangsf.easyjoke.bean.Person;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,14 +40,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mButton.setText("viewbyid");
 
-        customFixBug();
+        //  customFixBug();
 
         // int i = 2 / 0;
         mButton.setOnClickListener(this);
 
-        AlertDialog alertDialog = new AlertDialog.Builder(this)
-                .setMessage("")
-                .show();
+        IDaoSupport daoSupport = DaoSupportFactory.getFactory().getDao(Person.class);
+        daoSupport.insert(new Person("22", 71));
 
     }
 

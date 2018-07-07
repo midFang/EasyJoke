@@ -44,11 +44,11 @@ public class App extends Application {
 //        // 加载之前的apatch 差分包, 有可能不只有一个差分包, 所以加载之前的差分包
 //        mPatchManager.loadPatch();
 
-        FixBugManager fixBugManager = new FixBugManager(this);
-        try {
-            fixBugManager.loadFixDex();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        FixBugManager fixBugManager = new FixBugManager(this);
+//        try {
+//            fixBugManager.loadFixDex();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }
