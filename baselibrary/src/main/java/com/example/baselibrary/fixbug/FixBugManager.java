@@ -177,7 +177,6 @@ public class FixBugManager {
             librarySearchPath.mkdirs();
         }
 
-
         for (File dexFile : fixDexFiles) {
 
             // fixDex, 解析成classLoader

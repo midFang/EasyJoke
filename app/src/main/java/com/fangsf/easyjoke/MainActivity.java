@@ -2,6 +2,7 @@ package com.fangsf.easyjoke;
 
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +39,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // int i = 2 / 0;
         mButton.setOnClickListener(this);
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setMessage("")
+                .show();
+
     }
 
     private void customFixBug() {
@@ -80,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-       int i = 2 / 0;
+        int i = 2 / 0;
         Toast.makeText(this, "bug修复测试", Toast.LENGTH_SHORT).show();
     }
 }
