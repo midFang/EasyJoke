@@ -1,5 +1,9 @@
 package com.example.framelibrary.db;
 
+import android.text.TextUtils;
+
+import java.util.Locale;
+
 /**
  * Created by fangsf on 2018/7/7.
  * Useful:
@@ -29,5 +33,17 @@ public class DaoUtils {
             value = " long";
         }
         return value;
+    }
+
+    /**
+     * 首字母大写
+     * @param string
+     * @return
+     */
+    public static String getCapitalize(String string) {
+        if (!TextUtils.isEmpty(string)) {
+            return string.substring(0, 1).toUpperCase(Locale.US) + string.substring(1);
+        }
+        return string == null ? null : "";
     }
 }

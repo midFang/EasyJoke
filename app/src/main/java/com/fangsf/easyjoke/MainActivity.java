@@ -17,6 +17,7 @@ import com.example.baselibrary.ioc.ViewById;
 import com.example.baselibrary.ioc.ViewUtils;
 import com.example.framelibrary.db.DaoSupport;
 import com.example.framelibrary.db.DaoSupportFactory;
+import com.example.framelibrary.db.DaoUtils;
 import com.example.framelibrary.db.IDaoSupport;
 import com.fangsf.easyjoke.bean.Person;
 
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ViewUtils.bind(this);
 
+
+
         PermissionUtils.permission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
 
@@ -53,11 +56,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         IDaoSupport daoSupport = DaoSupportFactory.getFactory().getDao(Person.class);
 
 
-        List<Person> personList = new ArrayList<>();
-        for (int i = 0; i < 200; i++) {
-            personList.add(new Person("test", i));
-        }
-        daoSupport.insert(personList);
+//        List<Person> personList = new ArrayList<>();
+//        for (int i = 0; i < 200; i++) {
+//            personList.add(new Person("test", i));
+//        }
+//        daoSupport.insert(personList);
+
+        List query = daoSupport.query();
+        Toast.makeText(this, "" + query.size(), Toast.LENGTH_SHORT).show();
     }
 
     private void customFixBug() {

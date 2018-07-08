@@ -2,14 +2,21 @@ package com.example.framelibrary.db;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.view.menu.MenuView;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.transform.sax.TransformerHandler;
 
 /**
  * Created by fangsf on 2018/7/7.
@@ -83,6 +90,99 @@ public class DaoSupport<T> implements IDaoSupport<T> {
         mSQLiteDatabase.endTransaction();
     }
 
+    @Override
+    public List<T> query() {
+        Cursor cursor = mSQLiteDatabase.query(DaoUtils.getTableName(mClazz),
+                null, null, null, null, null, null);
+
+        return cursorToList(cursor);
+    }
+
+    private List<T> cursorToList(Cursor cursor) {
+        List<T> list = new ArrayList<>();
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                try {
+                    T instance = mClazz.newInstance(); // 是一个无参数的构造方法
+                    mClazz.newInstance();
+                    Field[] fields = mClazz.getDeclaredFields();
+                    for (Field field : fields) {
+                        field.setAccessible(true);
+                        String name = field.getName();
+                        // 获取角标
+                        int index = cursor.getColumnIndex(name);
+                        if (index == -1) {
+                            continue;
+                        }
+
+                        Method cursorMethod = cursorMethod(field.getType());
+                        if (cursorMethod != null) {
+                            Object value = cursorMethod.invoke(cursor, index);
+                            if (value == null) {
+                                continue;
+                            }
+
+                            // 处理特殊的部分
+                            if (field.getType() == boolean.class || field.getType() == Boolean.class) {
+                                if ("0".equals(String.valueOf(value))) {
+                                    value = false;
+                                } else if ("1".equals(String.valueOf(value))) {
+                                    value = true;
+                                }
+                            } else if (field.getType() == char.class || field.getType() == Character.class) {
+                                value = ((String) value).charAt(0);
+                            } else if (field.getType() == Date.class) {
+                                long date = (Long) value;
+                                if (date <= 0) {
+                                    value = null;
+                                } else {
+                                    value = new Date(date);
+                                }
+                            }
+                            // 反射注入
+                            field.set(instance, value);
+                        }
+                    }
+
+                    list.add(instance);
+
+                } catch (Exception e) { // 查询数据库的事件,实体类需要提供无参数的构造方法
+                    e.printStackTrace();
+                    Log.i(TAG, " cursorToList: " + e.getMessage());
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return list;
+    }
+
+    private Method cursorMethod(Class<?> type) throws Exception {
+        String methodName = getColumnMethodName(type);
+        Method method = Cursor.class.getMethod(methodName, int.class);
+        return method;
+    }
+
+    private String getColumnMethodName(Class<?> fieldType) {
+        String typeName;
+        if (fieldType.isPrimitive()) {
+            typeName = DaoUtils.getCapitalize(fieldType.getName());
+        } else {
+            typeName = fieldType.getSimpleName();
+        }
+        String methodName = "get" + typeName;
+        if ("getBoolean".equals(methodName)) {
+            methodName = "getInt";
+        } else if ("getChar".equals(methodName) || "getCharacter".equals(methodName)) {
+            methodName = "getString";
+        } else if ("getDate".equals(methodName)) {
+            methodName = "getLong";
+        } else if ("getInteger".equals(methodName)) {
+            methodName = "getInt";
+        }
+        return methodName;
+    }
+
     // 根据类型动态插入数据
     private ContentValues contentValueByObj(T clazz) {
         ContentValues values = new ContentValues();
@@ -122,4 +222,15 @@ public class DaoSupport<T> implements IDaoSupport<T> {
 
         return values;
     }
+
+    public int delete(String whereClause, String[] whereArgs) {
+        return mSQLiteDatabase.delete(DaoUtils.getTableName(mClazz), whereClause, whereArgs);
+    }
+
+    public int update(T obj, String whereClause, String... whereArgs) {
+        ContentValues values = contentValueByObj(obj);
+        return mSQLiteDatabase.update(DaoUtils.getTableName(mClazz), values,
+                whereClause, whereArgs);
+    }
+
 }

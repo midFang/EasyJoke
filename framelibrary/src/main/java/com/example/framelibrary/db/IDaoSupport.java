@@ -19,4 +19,11 @@ public interface IDaoSupport<T> {
      // 插入多条数据
      void insert(List<T> clazz);
 
+     // 查询所有
+      List<T> query();
+
+     int delete(String whereClause, String[] whereArgs);
+
+     int update(T obj, String whereClause, String... whereArgs);
+
 }
