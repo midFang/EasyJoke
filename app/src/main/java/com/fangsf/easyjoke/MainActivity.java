@@ -1,5 +1,6 @@
 package com.fangsf.easyjoke;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
@@ -21,6 +22,8 @@ import com.fangsf.easyjoke.bean.Person;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -33,8 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ViewUtils.bind(this);
+
+        PermissionUtils.permission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
 
         // initaPatch(); //阿里 热修复
 
@@ -46,8 +51,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mButton.setOnClickListener(this);
 
         IDaoSupport daoSupport = DaoSupportFactory.getFactory().getDao(Person.class);
-        daoSupport.insert(new Person("22", 71));
 
+
+        List<Person> personList = new ArrayList<>();
+        for (int i = 0; i < 200; i++) {
+            personList.add(new Person("test", i));
+        }
+        daoSupport.insert(personList);
     }
 
     private void customFixBug() {

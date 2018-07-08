@@ -1,9 +1,15 @@
 package com.example.framelibrary.db;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.ArrayMap;
 import android.util.Log;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by fangsf on 2018/7/7.
@@ -14,6 +20,12 @@ public class DaoSupport<T> implements IDaoSupport<T> {
 
     private SQLiteDatabase mSQLiteDatabase;
     private Class<T> mClazz;
+
+    // 缓存反射方法 以及参数
+    private static Object[] mPutMethodArgs = new Object[2];
+    @SuppressLint("NewApi")
+    public static Map<String, Method> mPutMethods = new ArrayMap<>();
+
 
     @Override
     public void init(SQLiteDatabase sqLiteDatabase, Class<T> clazz) {
@@ -54,7 +66,60 @@ public class DaoSupport<T> implements IDaoSupport<T> {
 
     // T 可以是任意对象
     @Override
-    public void insert(T tClass) {
+    public long insert(T clazz) {
+        ContentValues values = contentValueByObj(clazz);
 
+        return mSQLiteDatabase.insert(DaoUtils.getTableName(mClazz), null, values);
+    }
+
+    @Override
+    public void insert(List<T> clazz) {
+        // 性能优化的方法, 开始事物的方式
+        mSQLiteDatabase.beginTransaction();
+        for (T t : clazz) {
+            insert(t);
+        }
+        mSQLiteDatabase.setTransactionSuccessful();
+        mSQLiteDatabase.endTransaction();
+    }
+
+    // 根据类型动态插入数据
+    private ContentValues contentValueByObj(T clazz) {
+        ContentValues values = new ContentValues();
+
+        Field[] fields = clazz.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            try {
+                // 插入数据 value(age, 22)
+                String key = field.getName();
+                // 获取对象的 value 值
+                Object value = field.get(clazz);
+
+                // 参考view 的创建的 方式,做的缓存, 性能优化
+                mPutMethodArgs[0] = key;
+                mPutMethodArgs[1] = value;
+
+                String fileTypeName = field.getType().getName(); //会有 int, java.lang.string, 作为key会被缓存起来
+                //String fileTypeName = mClazz.getSimpleName(); // todo 所有的类型都只缓存一次 ?(这种方法是错误的)
+                Method putMethod = mPutMethods.get(fileTypeName); // 将反射方法缓存起来
+                if (putMethod == null) {
+                    // values.put(key, value);  //value 必须要具体的类型的, 所以只有通过反射注入 put方法中
+
+                    // 反射 获取 put(key, value); 方法
+                    putMethod = values.getClass().getMethod("put", String.class, value.getClass());
+                    mPutMethods.put(fileTypeName, putMethod);
+                }
+                putMethod.invoke(values, mPutMethodArgs);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e(TAG, "contentValueByObj: 插入失败 " + e.getMessage());
+            } finally {
+                mPutMethodArgs[0] = null;
+                mPutMethodArgs[1] = null;
+            }
+        }
+
+        return values;
     }
 }
