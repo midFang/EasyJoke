@@ -104,7 +104,6 @@ public class DaoSupport<T> implements IDaoSupport<T> {
             do {
                 try {
                     T instance = mClazz.newInstance(); // 是一个无参数的构造方法
-                    mClazz.newInstance();
                     Field[] fields = mClazz.getDeclaredFields();
                     for (Field field : fields) {
                         field.setAccessible(true);
@@ -115,8 +114,10 @@ public class DaoSupport<T> implements IDaoSupport<T> {
                             continue;
                         }
 
+                        // 不确定 属性是 getInt(),或者是getString()方法, 所以需要通过反射,动态获取
                         Method cursorMethod = cursorMethod(field.getType());
                         if (cursorMethod != null) {
+                            // 反射 获取 表中的value 的值
                             Object value = cursorMethod.invoke(cursor, index);
                             if (value == null) {
                                 continue;
