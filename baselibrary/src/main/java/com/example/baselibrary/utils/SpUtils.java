@@ -15,6 +15,8 @@ public class SpUtils {
 
     private static final String $$_MOBILE = "$$_MOBILE";
 
+    private static final String $$_PWD = "$$_PWD";
+
 
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
@@ -83,6 +85,14 @@ public class SpUtils {
         }
 
         return null;
+    }
+
+    public static void savePWD(Context context, String phone) {
+        setParam(context, $$_PWD, phone);
+    }
+
+    public static String getPWD(Context context) {
+        return (String) getParam(context, $$_PWD, "");
     }
 
     public static void saveMobile(Context context, String phone) {
