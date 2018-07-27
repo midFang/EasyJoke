@@ -26,4 +26,10 @@
 
     <style name="dialog_scale_anim"></style>
 
+
+    <declare-styleable name="SelectorImageView">
+        <attr name="selector_src" format="reference"/>
+        <attr name="checked" format="boolean"/>
+    </declare-styleable>
+
 </resources>

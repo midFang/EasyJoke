@@ -23,10 +23,17 @@ public class ChangeSkinActivity extends BaseSkinActivity {
     @Override
     protected void init() {
 
-
     }
 
     public void onClick(View view) {
+
+
+        //changeImage();
+
+    }
+
+    private void changeImage() {
+        // 获取另一个apk 种的文字 资源, 主要是通过resources 类加载的
         try {
             AssetManager assetManager = AssetManager.class.newInstance();
             // assetManager 最重要的是要添加 path 路径
