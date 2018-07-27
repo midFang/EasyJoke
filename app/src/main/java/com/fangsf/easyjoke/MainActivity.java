@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ViewUtils.bind(this);
 
 
-
         PermissionUtils.permission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
 

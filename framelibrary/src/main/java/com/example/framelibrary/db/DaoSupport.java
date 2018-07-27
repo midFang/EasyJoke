@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.view.menu.MenuView;
 import android.util.ArrayMap;
 import android.util.Log;
 

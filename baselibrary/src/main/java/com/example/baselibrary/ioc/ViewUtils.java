@@ -110,7 +110,9 @@ public class ViewUtils {
                 mMethod.invoke(mObject, v); //onClick(View v)
             } catch (Exception e) {
                 try {
-                    mMethod.invoke(mObject, null); //兼容onClick()
+                    // 方法注入
+                    mMethod.invoke(mObject, new Object()); //兼容onClick()
+                    // mMethod.invoke(mObject, null); //兼容onClick()
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }

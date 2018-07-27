@@ -97,10 +97,10 @@ public class ToolBar extends Toolbar {
     private void initView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.title_bar, null, false);
 
-        mIvBack = view.findViewById(R.id.ivBack);
-        mIvRight = view.findViewById(R.id.ivRight);
-        mTvTitle = view.findViewById(R.id.tvTitle);
-        mTvRight = view.findViewById(R.id.tvRight);
+        mIvBack = (ImageView) view.findViewById(R.id.ivBack);
+        mIvRight = (ImageView) view.findViewById(R.id.ivRight);
+        mTvTitle = (TextView) view.findViewById(R.id.tvTitle);
+        mTvRight = (TextView) view.findViewById(R.id.tvRight);
 
         LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL);
         addView(view, lp);
