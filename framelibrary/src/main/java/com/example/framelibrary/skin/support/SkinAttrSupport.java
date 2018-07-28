@@ -18,6 +18,7 @@ import java.util.List;
  */
 public class SkinAttrSupport {
     private static final String TAG = "SkinAttrSupport";
+
     /**
      * 获取view的属性
      */
@@ -35,11 +36,11 @@ public class SkinAttrSupport {
 
             SkinType skinType = getSkinType(attrName);
             if (skinType != null) {
-                String resName = getSkinResName(context,attrValue);
+                String resName = getSkinResName(context, attrValue);
                 if (TextUtils.isEmpty(resName)) {
                     continue;
                 }
-                SkinAttr skinAttr = new SkinAttr(resName,skinType);
+                SkinAttr skinAttr = new SkinAttr(resName, skinType);
                 attrList.add(skinAttr);
             }
         }
@@ -57,7 +58,7 @@ public class SkinAttrSupport {
      */
     private static String getSkinResName(Context context, String attrValue) {
         if (attrValue.startsWith("@")) {
-            attrValue =   attrValue.substring(1);
+            attrValue = attrValue.substring(1);
             int resId = Integer.parseInt(attrValue);
 
             return context.getResources().getResourceEntryName(resId);
@@ -66,9 +67,10 @@ public class SkinAttrSupport {
     }
 
     private static SkinType getSkinType(String attrName) {
+        // 是一个 枚举, 获取有多少常量, TEXT_COLOR,BACKGROUND,COLOR
         SkinType[] skinTypes = SkinType.values();
         for (SkinType skinType : skinTypes) {
-             // 存在这个type 就返回
+            // 存在这个type 就返回
             if (skinType.getResName().equals(attrName)) {
                 return skinType;
             }

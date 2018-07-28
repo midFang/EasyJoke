@@ -27,5 +27,4 @@ public class SkinView {
             attr.skin(mView);
         }
     }
-
 }

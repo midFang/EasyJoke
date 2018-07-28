@@ -1,11 +1,9 @@
 package com.example.framelibrary.skin;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
-import com.example.framelibrary.base.BaseSkinActivity;
 import com.example.framelibrary.skin.attr.SkinView;
 import com.example.framelibrary.skin.callback.SkinChangeListener;
 import com.example.framelibrary.skin.config.PreSkinUtil;
@@ -72,7 +70,7 @@ public class SkinManager {
     /**
      * 加载资源皮肤
      *
-     * @param skinPath
+     * @param skinPath 需要加载的皮肤资源包
      */
     public int loadSkin(String skinPath) {
         if (mContext == null) {
@@ -107,12 +105,15 @@ public class SkinManager {
     private void changeSkin() {
         Set<SkinChangeListener> activitySet = mSkinViews.keySet();
         for (SkinChangeListener key : activitySet) {
+
+            // 已经打开的activity 的view 也要换肤
             List<SkinView> skinViews = mSkinViews.get(key);
             for (SkinView skinView : skinViews) {
                 // 换肤
                 skinView.skin();
             }
 
+            // 回掉监听
             key.changeSkin(mSkinResource);
         }
     }
@@ -158,8 +159,8 @@ public class SkinManager {
         return SkinConfig.SKIN_LOAD_SUCCESS;
     }
 
-    public List<SkinView> getSkinViews(Activity activity) {
-        List<SkinView> skinViews = mSkinViews.get(activity);
+    public List<SkinView> getSkinViews(SkinChangeListener skinChangeListener) {
+        List<SkinView> skinViews = mSkinViews.get(skinChangeListener);
         return skinViews;
     }
 

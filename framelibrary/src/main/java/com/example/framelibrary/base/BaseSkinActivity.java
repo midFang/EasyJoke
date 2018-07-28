@@ -70,7 +70,7 @@ public abstract class BaseSkinActivity extends BaseActivity implements SkinChang
     /**
      * 统一管理skinView
      *
-     * @param skinView
+     * @param skinView , 将需要换肤的view 存储起来
      */
     private void managerSkinView(SkinView skinView) {
         List<SkinView> skinViewList = SkinManager.getInstance().getSkinViews(this);
