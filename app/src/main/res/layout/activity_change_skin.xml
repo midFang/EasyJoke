@@ -4,19 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backcolor"
     android:orientation="vertical"
     tools:context=".ChangeSkinActivity">
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onClick"
+        android:onClick="onClick3"
+        android:textColor="@color/txt_color"
         android:text="换肤" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick1"
+        android:text="恢复默认" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick2"
+        android:text="跳转" />
 
     <ImageView
         android:id="@+id/iv_girl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/gril" />
+        android:src="@mipmap/my_word" />
 
 </LinearLayout>

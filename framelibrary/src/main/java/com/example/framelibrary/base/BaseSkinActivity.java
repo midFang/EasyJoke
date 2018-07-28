@@ -7,24 +7,30 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.VectorEnabledTintResources;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewParent;
 
+import com.example.framelibrary.skin.SkinManager;
+import com.example.framelibrary.skin.SkinResource;
 import com.example.framelibrary.skin.attr.SkinAttr;
 import com.example.framelibrary.skin.attr.SkinView;
+import com.example.framelibrary.skin.callback.SkinChangeListener;
+import com.example.framelibrary.skin.config.PreSkinUtil;
 import com.example.framelibrary.skin.support.SkinAppCompatViewInflater;
 import com.example.framelibrary.skin.support.SkinAttrSupport;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by fangsf on 2018/7/16.
  * Useful:
  */
-public abstract class BaseSkinActivity extends BaseActivity {
+public abstract class BaseSkinActivity extends BaseActivity implements SkinChangeListener {
 
     private static final boolean IS_PRE_LOLLIPOP = Build.VERSION.SDK_INT < 21;
 
@@ -52,15 +58,36 @@ public abstract class BaseSkinActivity extends BaseActivity {
 
             // 统一交给SkinManager管理
             managerSkinView(skinView);
-        }
 
+            // 检测是否需要换肤
+            SkinManager.getInstance().checkChangeSkin(skinView);
+        }
 
 
         return view;
     }
 
+    /**
+     * 统一管理skinView
+     *
+     * @param skinView
+     */
     private void managerSkinView(SkinView skinView) {
+        List<SkinView> skinViewList = SkinManager.getInstance().getSkinViews(this);
+        if (skinViewList == null) {
+            skinViewList = new ArrayList<>();
+            SkinManager.getInstance().register(this, skinViewList);
+        }
 
+        skinViewList.add(skinView);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // 性能优化
+        SkinManager.getInstance().unRegister(this);
     }
 
     public View createView(View parent, final String name, @NonNull Context context,
@@ -106,5 +133,9 @@ public abstract class BaseSkinActivity extends BaseActivity {
         }
     }
 
-
+    @Override
+    public void changeSkin(SkinResource skinResource) {
+        // 切换 皮肤后的通知
+        Log.i(TAG, "changeSkin: " + skinResource);
+    }
 }

@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.framelibrary.base.BaseSkinActivity;
+import com.example.framelibrary.skin.SkinManager;
+import com.example.framelibrary.skin.SkinResource;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -25,8 +27,11 @@ public class ChangeSkinActivity extends BaseSkinActivity {
 
     }
 
-    public void onClick(View view) {
+    public void onClick3(View view) {
 
+        String skinPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator +
+                "red.skin";
+        SkinManager.getInstance().loadSkin(skinPath);
 
         //changeImage();
 
@@ -61,4 +66,15 @@ public class ChangeSkinActivity extends BaseSkinActivity {
             e.printStackTrace();
         }
     }
+
+    // 恢复默认
+    public void onClick1(View view) {
+       int result =  SkinManager.getInstance().restoreDefault();
+    }
+
+    // 跳转
+    public void onClick2(View view) {
+        startActivity(ChangeSkinActivity.class);
+    }
+
 }

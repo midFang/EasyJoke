@@ -9,6 +9,7 @@ import com.example.baselibrary.exception.CrashAppHandler;
 import com.example.baselibrary.fixbug.FixBugManager;
 import com.example.baselibrary.net.HttpUtils;
 import com.example.baselibrary.net.OkHttpEngine;
+import com.example.framelibrary.skin.SkinManager;
 
 import java.io.File;
 
@@ -27,6 +28,8 @@ public class App extends Application {
 
         // 初始化网络引擎
         HttpUtils.init(new OkHttpEngine());
+
+        SkinManager.getInstance().init(this);
 
         // 全局异常的捕捉类
         CrashAppHandler.getInstance().init(this);
