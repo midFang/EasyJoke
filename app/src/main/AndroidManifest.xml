@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -13,14 +16,30 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChangeSkinActivity">
+        <activity android:name=".GuardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".ChangeSkinActivity"></activity>-->
+        <!-- <activity android:name=".ChangeSkinActivity"></activity> -->
+        <!-- <activity android:name=".GuardActivity"></activity> -->
+
+        <service
+            android:name=".service.MessageService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.GuardService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":guardService"></service>
+
+        <service
+            android:name=".service.JobWakeUpService"
+            android:enabled="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"></service>
     </application>
 
 </manifest>

@@ -49,7 +49,7 @@ public abstract class BaseSkinActivity extends BaseActivity implements SkinChang
     public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
 
         View view = createView(parent, name, context, attrs);
-        Log.i(TAG, " onCreateView: " + view);
+     //   Log.i(TAG, " onCreateView: " + view);
         if (view != null) {
             // 一个activity 对应多个 skinView
             // 获取view 中的 属性, textColor, src, background
