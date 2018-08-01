@@ -6,5 +6,6 @@
 
     <color name="backcolor" >#492</color>
     <color name="txt_color">#ee084d</color>
+    <color name="yellow_bg" >#ffec16</color>
 
 </resources>

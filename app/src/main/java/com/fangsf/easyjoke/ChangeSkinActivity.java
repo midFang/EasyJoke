@@ -14,6 +14,9 @@ import com.example.framelibrary.skin.SkinResource;
 import java.io.File;
 import java.lang.reflect.Method;
 
+/**
+ * 换肤页面
+ */
 public class ChangeSkinActivity extends BaseSkinActivity {
 
 

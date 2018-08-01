@@ -32,13 +32,13 @@ public class App extends Application {
         SkinManager.getInstance().init(this);
 
         // 全局异常的捕捉类
-        CrashAppHandler.getInstance().init(this);
-        CrashAppHandler.getInstance().setCrashLogListener(new CrashAppHandler.OnCrashLogListener() {
-            @Override
-            public void logInfo(final File folder, File file) {
-                // 可以上传删除错误信息
-            }
-        });
+//        CrashAppHandler.getInstance().init(this);
+//        CrashAppHandler.getInstance().setCrashLogListener(new CrashAppHandler.OnCrashLogListener() {
+//            @Override
+//            public void logInfo(final File folder, File file) {
+//                // 可以上传删除错误信息
+//            }
+//        });
 
 //        // 阿里 热修复的使用
 //        mPatchManager = new PatchManager(this);
