@@ -4,8 +4,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.fangsf.easyjoke.banner.BannerAdapter;
@@ -21,6 +23,8 @@ import butterknife.ButterKnife;
  */
 public class BannerViewActivity extends AppCompatActivity {
 
+
+    private static final String TAG = "BannerViewActivity";
 
     @BindView(R.id.banner_view1)
     BannerView mBannerView;
@@ -43,11 +47,25 @@ public class BannerViewActivity extends AppCompatActivity {
     protected void init() {
         mBannerView.setAdapter(new BannerAdapter() {
             @Override
-            public View getView(int position) {
+            public View getView(final int position, View convertView) {
 
                 BannerBean bannerBean = mBannerList.get(position);
+                ImageView imageView = null;
 
-                ImageView imageView = new ImageView(BannerViewActivity.this);
+                if (convertView == null) {
+                    imageView = new ImageView(BannerViewActivity.this);
+                } else {
+                    Log.i(TAG, "getView: 界面复用了 " + convertView);
+                    imageView = (ImageView) convertView; // 复用view
+                }
+
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(BannerViewActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 imageView.setBackgroundColor(Color.DKGRAY);
                 Glide.with(BannerViewActivity.this)
                         .load(bannerBean.getResId()).centerCrop()

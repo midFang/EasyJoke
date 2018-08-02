@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -115,7 +116,6 @@ public class BannerView extends RelativeLayout {
         this.mBannerAdapter = adapter;
         mBannerViewPager.setAdapter(adapter);
 
-
         initBottomDotIndicator();
 
         mBannerViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -124,9 +124,9 @@ public class BannerView extends RelativeLayout {
                 super.onPageSelected(position);
 
                 pageSelect(position);
-
             }
         });
+
 
         // 默认选中第一个 位置
         String title = mBannerAdapter.getTitle(0);
@@ -140,6 +140,7 @@ public class BannerView extends RelativeLayout {
         int height = (int) ((mHeightProportion * width) / mWidthProportion);
         getLayoutParams().height = height;
     }
+
 
     /**
      * 设置选中的文字

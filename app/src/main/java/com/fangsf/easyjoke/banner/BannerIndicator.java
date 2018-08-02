@@ -73,8 +73,12 @@ public class BannerIndicator extends View {
             circlePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
             // 把原来的 bitmap 画在圆上, 取交际
             canvas.drawBitmap(bitmap, 0, 0, circlePaint);
-        }
 
+            // 销毁bitmap
+            bitmap.recycle();
+            bitmap = null;
+
+        }
         return circleBitmap;
     }
 
