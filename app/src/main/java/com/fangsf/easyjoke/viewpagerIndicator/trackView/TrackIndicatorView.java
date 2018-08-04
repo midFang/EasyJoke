@@ -152,6 +152,7 @@ public class TrackIndicatorView extends HorizontalScrollView implements ViewPage
         itemView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                // msotthScroll 为false viewPager 的addOnPageChangeListener .onPageScrolled方法不会调用, 解决bug,
                 mViewPager.setCurrentItem(position, mSmoothScroll);
 
                 // 移动 indicatorView

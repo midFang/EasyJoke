@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,12 +89,12 @@ public class ColorTrackTextViewActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
-
+                Log.i(TAG, "onPageSelected: ");
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                Log.i(TAG, "onPageScrollStateChanged: ");
             }
         });
 
@@ -164,7 +165,7 @@ public class ColorTrackTextViewActivity extends BaseActivity {
 
                 return colorTrackTextView;
             }
-        }, mViewPager,false);
+        }, mViewPager, false);
 
 
     }
