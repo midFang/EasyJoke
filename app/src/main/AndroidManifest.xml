@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".viewpagerIndicator.ColorTrackTextViewActivity">
+        <activity android:name=".activity.TestSelectImageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,6 +38,7 @@
             android:enabled="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
+        <activity android:name=".activity.SelectImageActivity"></activity>
     </application>
 
 </manifest>

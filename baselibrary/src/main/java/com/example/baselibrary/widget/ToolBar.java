@@ -52,12 +52,16 @@ public class ToolBar extends Toolbar {
         mRightIcon = array.getInt(R.styleable.ToolBar_rightIcon, mRightIcon);
         mRightText = array.getString(R.styleable.ToolBar_rightText);
         mIsFinshActivity = array.getBoolean(R.styleable.ToolBar_finishActivity, true);
-        mDefaultTextSize = array.getDimensionPixelSize(R.styleable.ToolBar_defaultTextSize, 15);
+        mDefaultTextSize = array.getDimensionPixelSize(R.styleable.ToolBar_defaultTextSize, dip2px(15));
         mTextColor = array.getColor(R.styleable.ToolBar_defaultTextColor, mTextColor);
 
         array.recycle();
 
         setData();
+    }
+
+    private int dip2px(int px) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, px, getResources().getDisplayMetrics());
     }
 
     private void setData() {

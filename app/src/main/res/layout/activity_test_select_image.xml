@@ -5,14 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.BannerViewActivity">
+    tools:context=".activity.TestSelectImageActivity">
 
-    <com.fangsf.easyjoke.banner.BannerView
+    <Button
+        android:onClick="onClick"
+        android:text="跳转"
         android:layout_width="match_parent"
-        android:id="@+id/banner_view1"
-        app:dotIndicatorFocus="@color/yellow_bg"
-        app:dotGravity="center"
-        android:layout_height="170dp"/>
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
 
 
 </LinearLayout>

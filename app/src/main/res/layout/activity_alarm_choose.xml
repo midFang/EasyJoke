@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SelectImageActivity">
+
+    <com.example.baselibrary.widget.ToolBar
+        app:defaultTextColor="#fff"
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#564d4d"
+        app:centerText="所有图片" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rc_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_bar"
+        android:background="#564d4d" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#DD564d4d"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/tv_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="预览" />
+
+        <TextView
+            android:id="@+id/tv_choose_nums"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="2/3" />
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="确定" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

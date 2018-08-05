@@ -1,32 +1,27 @@
-package com.fangsf.easyjoke;
+package com.fangsf.easyjoke.activity;
 
 import android.Manifest;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.PermissionUtils;
-import com.example.baselibrary.commonDialog.BaseAlertDialog;
 import com.example.baselibrary.fixbug.FixBugManager;
 import com.example.baselibrary.ioc.OnClick;
 import com.example.baselibrary.ioc.ViewById;
 import com.example.baselibrary.ioc.ViewUtils;
-import com.example.framelibrary.db.DaoSupport;
 import com.example.framelibrary.db.DaoSupportFactory;
-import com.example.framelibrary.db.DaoUtils;
 import com.example.framelibrary.db.IDaoSupport;
+import com.fangsf.easyjoke.App;
+import com.fangsf.easyjoke.R;
 import com.fangsf.easyjoke.bean.Person;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

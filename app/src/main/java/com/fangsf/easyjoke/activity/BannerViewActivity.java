@@ -1,4 +1,4 @@
-package com.fangsf.easyjoke;
+package com.fangsf.easyjoke.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.fangsf.easyjoke.R;
 import com.fangsf.easyjoke.banner.BannerAdapter;
 import com.fangsf.easyjoke.banner.BannerView;
 

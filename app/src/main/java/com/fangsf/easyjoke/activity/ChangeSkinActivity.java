@@ -1,4 +1,4 @@
-package com.fangsf.easyjoke;
+package com.fangsf.easyjoke.activity;
 
 import android.content.res.AssetManager;
 import android.content.res.Resources;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.example.framelibrary.base.BaseSkinActivity;
 import com.example.framelibrary.skin.SkinManager;
-import com.example.framelibrary.skin.SkinResource;
+import com.fangsf.easyjoke.R;
 
 import java.io.File;
 import java.lang.reflect.Method;

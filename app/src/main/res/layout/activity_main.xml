@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fangsf.easyjoke.MainActivity">
+    tools:context="com.fangsf.easyjoke.activity.MainActivity">
 
     <com.example.baselibrary.widget.ToolBar
         android:layout_width="match_parent"

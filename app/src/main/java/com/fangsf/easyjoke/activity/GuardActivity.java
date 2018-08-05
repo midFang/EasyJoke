@@ -1,9 +1,10 @@
-package com.fangsf.easyjoke;
+package com.fangsf.easyjoke.activity;
 
 import android.content.Intent;
 import android.os.Build;
 
 import com.example.framelibrary.base.BaseSkinActivity;
+import com.fangsf.easyjoke.R;
 import com.fangsf.easyjoke.service.GuardService;
 import com.fangsf.easyjoke.service.JobWakeUpService;
 import com.fangsf.easyjoke.service.MessageService;
