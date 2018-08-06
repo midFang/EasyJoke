@@ -1,4 +1,4 @@
-package com.fangsf.easyjoke.adapter;
+package com.fangsf.easyjoke.selectimage;
 
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -65,16 +65,19 @@ public class SelectImageAdapter extends BaseQuickAdapter<String, BaseViewHolder>
             ivPreView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mImageMaxCount <= mResultImageList.size()) {
-                        Toast.makeText(mContext, "只能选择" + mResultImageList.size() + "张图片", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
                     // 判断是否在集合中, 不在集合中,就设置为选中, 在集合中,则取消选中
                     if (!mResultImageList.contains(item)) {
+                        if (mImageMaxCount <= mResultImageList.size()) {
+                            Toast.makeText(mContext, "只能选择" + mResultImageList.size() + "张图片", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         mResultImageList.add(item);
                     } else {
                         mResultImageList.remove(item);
+                    }
+
+                    if (mImageListener != null) {
+                        mImageListener.selectedImage();
                     }
 
                     notifyItemChanged(helper.getLayoutPosition());
@@ -83,7 +86,14 @@ public class SelectImageAdapter extends BaseQuickAdapter<String, BaseViewHolder>
             });
 
         }
-
-
     }
+
+    // 选择图片的监听回调
+    private SelectImageListener mImageListener;
+
+    public void setOnSelectImageListener(SelectImageListener listener) {
+        this.mImageListener = listener;
+    }
+
+
 }

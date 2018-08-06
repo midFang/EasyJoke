@@ -1,4 +1,4 @@
-package com.fangsf.easyjoke.activity;
+package com.fangsf.easyjoke.selectimage;
 
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -12,15 +12,15 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.fangsf.easyjoke.R;
-import com.fangsf.easyjoke.adapter.SelectImageAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectImageActivity extends AppCompatActivity {
+public class SelectImageActivity extends AppCompatActivity implements SelectImageListener, View.OnClickListener {
     private static final String TAG = "SelectImageActivity";
 
 
@@ -70,9 +70,11 @@ public class SelectImageActivity extends AppCompatActivity {
 
         getIntents();
 
-
         // 获取相册的图片
         initImageList();
+
+        mTvChooseNums.setText(mResultList.size() + "/" + mMaxCount);
+        mTvConfirm.setOnClickListener(this);
     }
 
     private void initViews() {
@@ -80,6 +82,8 @@ public class SelectImageActivity extends AppCompatActivity {
         mTvPreview = findViewById(R.id.tv_preview);
         mTvChooseNums = findViewById(R.id.tv_choose_nums);
         mTvConfirm = findViewById(R.id.tv_confirm);
+
+
     }
 
     /**
@@ -182,6 +186,7 @@ public class SelectImageActivity extends AppCompatActivity {
         ((SimpleItemAnimator) mRcImage.getItemAnimator()).setSupportsChangeAnimations(false);
         mRcImage.setLayoutManager(new GridLayoutManager(this, 4));
         mRcImage.setAdapter(mImageAdapter);
+        mImageAdapter.setOnSelectImageListener(this);
     }
 
 
@@ -196,6 +201,24 @@ public class SelectImageActivity extends AppCompatActivity {
             if (mResultList == null) {
                 mResultList = new ArrayList<>();
             }
+        }
+    }
+
+    @Override
+    public void selectedImage() {
+        mTvChooseNums.setText(mResultList.size() + "/" + mMaxCount);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if (v.getId() == R.id.tv_confirm) {
+            // 返回给上一个页面数据
+            Intent intent = new Intent();
+            intent.putStringArrayListExtra(EXTRA_DEFAULT_SELECTED_LIST, mResultList);
+            setResult(RESULT_OK, intent);
+
+            finish();
         }
     }
 }

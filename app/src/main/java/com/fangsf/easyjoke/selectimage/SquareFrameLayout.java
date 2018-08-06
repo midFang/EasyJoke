@@ -1,26 +1,26 @@
-package com.fangsf.easyjoke.widget;
+package com.fangsf.easyjoke.selectimage;
 
 import android.content.Context;
-import android.media.audiofx.EnvironmentalReverb;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 /**
  * Created by fangsf on 2018/8/6.
- * Useful:  一个正方形的imageview
+ * Useful:  正方形的容器
  */
-public class SquareImage extends AppCompatImageView {
-
-    public SquareImage(Context context) {
+public class SquareFrameLayout extends RelativeLayout {
+    public SquareFrameLayout(@NonNull Context context) {
         super(context);
     }
 
-    public SquareImage(Context context, @Nullable AttributeSet attrs) {
+    public SquareFrameLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public SquareImage(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public SquareFrameLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
