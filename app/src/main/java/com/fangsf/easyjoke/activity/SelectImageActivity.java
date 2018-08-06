@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -176,10 +177,11 @@ public class SelectImageActivity extends AppCompatActivity {
      */
     private void showImageList(ArrayList<String> images) {
         Log.i(TAG, " images: 图片个数-> " + images.size());
-        mImageAdapter = new SelectImageAdapter(R.layout.item_image, images);
+        mImageAdapter = new SelectImageAdapter(R.layout.item_image, images, mResultList, mMaxCount);
+        mImageAdapter.setHasStableIds(true); // 去除加载的默认动画,(notifiyDataSetChage, 图片会闪烁)
+        ((SimpleItemAnimator) mRcImage.getItemAnimator()).setSupportsChangeAnimations(false);
         mRcImage.setLayoutManager(new GridLayoutManager(this, 4));
         mRcImage.setAdapter(mImageAdapter);
-
     }
 
 

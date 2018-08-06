@@ -5,12 +5,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 /**
  * Created by fangsf on 2018/8/6.
  * Useful:  正方形的容器
  */
-public class SquareFrameLayout extends FrameLayout {
+public class SquareFrameLayout extends RelativeLayout {
     public SquareFrameLayout(@NonNull Context context) {
         super(context);
     }
