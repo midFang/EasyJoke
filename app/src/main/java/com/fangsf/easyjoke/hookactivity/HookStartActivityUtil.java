@@ -59,6 +59,8 @@ public class HookStartActivityUtil {
                 handleLaunchActivity(msg);
             }
 
+
+
             return false;
         }
 
