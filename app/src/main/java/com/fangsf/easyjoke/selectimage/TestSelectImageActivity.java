@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.example.framelibrary.base.BaseActivity;
 import com.fangsf.easyjoke.R;
+import com.fangsf.easyjoke.activity.TestActivity;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ public class TestSelectImageActivity extends BaseActivity {
 
 
     public void onClick(View view) {
+
 //        Intent intent = new Intent(this, SelectImageActivity.class);
 //        intent.putExtra(SelectImageActivity.EXTRA_SELECT_MAX_COUNT, 9);
 //        intent.putExtra(SelectImageActivity.EXTRA_SELECT_MODE, SelectImageActivity.MODE_MULTI);
@@ -33,9 +35,13 @@ public class TestSelectImageActivity extends BaseActivity {
 //        intent.putStringArrayListExtra(SelectImageActivity.EXTRA_DEFAULT_SELECTED_LIST, mImageList);
 //        startActivityForResult(intent, SELECT_IMAGE_RESULT);
 
+        Intent intent = new Intent(this, TestActivity.class);
+        startActivity(intent);
+
+
         // 替换上面的写法
-        ImageSelector.create().count(9).multi().origin(mImageList).showCamera(true)
-                .start(this, SELECT_IMAGE_RESULT);
+//        ImageSelector.create().count(9).multi().origin(mImageList).showCamera(true)
+//                .start(this, SELECT_IMAGE_RESULT);
     }
 
     @Override

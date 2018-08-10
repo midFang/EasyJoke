@@ -76,9 +76,9 @@ public class BannerView extends RelativeLayout {
     }
 
     private void initViews() {
-        mBannerViewPager = findViewById(R.id.banner_view_pager);
-        mBannerDesc = findViewById(R.id.banner_desc);
-        mBannerDotIndicator = findViewById(R.id.banner_indicator);
+        mBannerViewPager = (BannerViewPager) findViewById(R.id.banner_view_pager);
+        mBannerDesc = (TextView) findViewById(R.id.banner_desc);
+        mBannerDotIndicator = (LinearLayout) findViewById(R.id.banner_indicator);
         mBottomView = findViewById(R.id.banner_bottom);
     }
 

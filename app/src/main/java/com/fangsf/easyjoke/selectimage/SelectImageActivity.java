@@ -78,10 +78,10 @@ public class SelectImageActivity extends AppCompatActivity implements SelectImag
     }
 
     private void initViews() {
-        mRcImage = findViewById(R.id.rc_image);
-        mTvPreview = findViewById(R.id.tv_preview);
-        mTvChooseNums = findViewById(R.id.tv_choose_nums);
-        mTvConfirm = findViewById(R.id.tv_confirm);
+        mRcImage = (RecyclerView) findViewById(R.id.rc_image);
+        mTvPreview = (TextView) findViewById(R.id.tv_preview);
+        mTvChooseNums = (TextView) findViewById(R.id.tv_choose_nums);
+        mTvConfirm = (TextView) findViewById(R.id.tv_confirm);
 
 
     }
@@ -93,26 +93,6 @@ public class SelectImageActivity extends AppCompatActivity implements SelectImag
         // 这里可以考虑使用 thread, anyncTask, 加载图片, 获取使用 getLoaderManager() (异步加载神器, 自动更新ui)
 
         getLoaderManager().initLoader(LOADER_TYPE, null, mLoaderCallbacks);
-        /**
-         *  // 查询图片需要的信息
-         private final String[] IMAGE_PROJECTION = {
-         MediaStore.Images.Media.DATA,
-         MediaStore.Images.Media.DISPLAY_NAME,
-         MediaStore.Images.Media.DATE_ADDED,
-         MediaStore.Images.Media.MIME_TYPE,
-         MediaStore.Images.Media.SIZE,
-         MediaStore.Images.Media._ID
-         };
-
-         CursorLoader cursorLoader = new CursorLoader(SelectImageActivity.this,
-         MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-         IMAGE_PROJECTION, IMAGE_PROJECTION[4] + ">0 AND " +
-         IMAGE_PROJECTION[3] + "=? OR " + IMAGE_PROJECTION[3] + "=? ",
-         new String[]{"image/jpeg", "image/png"},
-         IMAGE_PROJECTION[2] + " DESC");
-
-         */
-
     }
 
     private LoaderManager.LoaderCallbacks<Cursor> mLoaderCallbacks = new LoaderManager.LoaderCallbacks<Cursor>() {
@@ -151,7 +131,7 @@ public class SelectImageActivity extends AppCompatActivity implements SelectImag
             if (data != null && data.getCount() > 0) {
                 ArrayList<String> images = new ArrayList<>();
                 if (mIsShowCamera) {
-                    // 是否拍照
+                    // 是否拍照, 集合中第一个数据添加一个空的, adapter 中 判断第一个为空的话, 就需要拍照功能显示出来
                     images.add("");
                 }
 

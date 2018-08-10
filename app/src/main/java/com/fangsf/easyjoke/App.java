@@ -10,6 +10,8 @@ import com.example.baselibrary.fixbug.FixBugManager;
 import com.example.baselibrary.net.HttpUtils;
 import com.example.baselibrary.net.OkHttpEngine;
 import com.example.framelibrary.skin.SkinManager;
+import com.fangsf.easyjoke.activity.ProxyActivity;
+import com.fangsf.easyjoke.hookactivity.HookStartActivityUtil;
 
 import java.io.File;
 
@@ -29,7 +31,18 @@ public class App extends Application {
         // 初始化网络引擎
         HttpUtils.init(new OkHttpEngine());
 
+        // 插件式 换肤框架
         SkinManager.getInstance().init(this);
+
+        // 插件式 启动 activity
+        HookStartActivityUtil startActivityUtil = new HookStartActivityUtil(this, ProxyActivity.class);
+        try {
+            startActivityUtil.hookStartActivity();
+            startActivityUtil.hookHandlerLauncherActivity();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         // 全局异常的捕捉类
 //        CrashAppHandler.getInstance().init(this);
