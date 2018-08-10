@@ -68,6 +68,7 @@ public class HookStartActivityUtil {
                 Object record = msg.obj;
                 Field intentField = record.getClass().getDeclaredField("intent");
                 intentField.setAccessible(true);
+
                 // 获取过了安检的intent
                 Intent safeIntent = (Intent) intentField.get(record);
                 // 获取绑定了的 原来的intent -> 没有在清单文件注册的activity的intent
