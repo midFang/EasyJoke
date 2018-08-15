@@ -1,5 +1,6 @@
 package com.fangsf.easyjoke.hookactivity;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -13,7 +14,7 @@ import java.lang.reflect.Proxy;
 
 /**
  * Created by fangsf on 2018/8/10.
- * Useful:
+ * Useful: 动态代理 HookStartActivity 类, 调用startActivity 会拦截到这个这个类中
  */
 public class HookStartActivityUtil {
     private static final String TAG = "HookStartActivityUtil";
@@ -28,7 +29,7 @@ public class HookStartActivityUtil {
     }
 
     /**
-     * 3 hook 启动activity
+     * 3 hook 启动activity, 使用清单文件已经注册好的activity绕过检测
      */
     public void hookHandlerLauncherActivity() throws Exception {
         // 获取activityThread 实例
@@ -56,10 +57,43 @@ public class HookStartActivityUtil {
         public boolean handleMessage(Message msg) {
 
             if (msg.what == 100) { // 源码中的 LAUNCH_ACTIVITY
+                Log.i(TAG, "handleMessage: HookLaunchActivity -> handlerMessage ");
+                // 替换真正的activity
                 handleLaunchActivity(msg);
+
+                // 兼容AppCompatActivity
+                hookPackageManagerInfo();
             }
 
             return false;
+        }
+
+        /**
+         * 兼容AppCompatActivity, 继承appCompatActivity, 做了兼容处理, 再一次检测了清单文件中的信息
+         * 所以让他,首次 检测文件信息, 后面就是使用的缓存信息了
+         */
+        private void hookPackageManagerInfo() {
+            try {
+                // 兼容AppCompatActivity报错问题
+                Class<?> forName = Class.forName("android.app.ActivityThread");
+                Field field = forName.getDeclaredField("sCurrentActivityThread");
+                field.setAccessible(true);
+                Object activityThread = field.get(null);
+                Method getPackageManager = activityThread.getClass().getDeclaredMethod("getPackageManager");
+                Object iPackageManager = getPackageManager.invoke(activityThread);
+
+                PackageManagerHandler handler = new PackageManagerHandler(iPackageManager);
+                Class<?> iPackageManagerIntercept = Class.forName("android.content.pm.IPackageManager");
+                Object proxy = Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),
+                        new Class<?>[]{iPackageManagerIntercept}, handler);
+
+                // 获取 sPackageManager 属性
+                Field iPackageManagerField = activityThread.getClass().getDeclaredField("sPackageManager");
+                iPackageManagerField.setAccessible(true);
+                iPackageManagerField.set(activityThread, proxy);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         private void handleLaunchActivity(Message msg) {
@@ -86,6 +120,11 @@ public class HookStartActivityUtil {
     }
 
 
+    /**
+     * 拦截  StartActivity , 下钩子
+     *
+     * @throws Exception
+     */
     public void hookStartActivity() throws Exception {
 
         // 获取 方法的执行者, 也就是反射那个类在真正执行的startActivity   -> 需要获取的类是  Singleton 中的 IActivityManager 实例
@@ -113,6 +152,25 @@ public class HookStartActivityUtil {
 
         // 1.1 需要重新指定为自己设置的 实例
         mInstanceField.set(gDefault, iamInstance);
+    }
+
+    private class PackageManagerHandler implements InvocationHandler {
+
+        private final Object mActivityManagerObject;
+
+        public PackageManagerHandler(Object iActivityManagerObject) {
+            this.mActivityManagerObject = iActivityManagerObject;
+        }
+
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            if (method.getName().startsWith("getActivityInfo")) {
+                ComponentName componentName = new ComponentName(mContext, mSafeActivityClass);
+                args[0] = componentName;
+            }
+
+            return method.invoke(mActivityManagerObject, args);
+        }
     }
 
     private class StartActivityInvocationHandler implements InvocationHandler {
