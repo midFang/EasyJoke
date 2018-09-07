@@ -29,10 +29,10 @@ public class App extends Application {
 
 
         // 初始化网络引擎
-        HttpUtils.init(new OkHttpEngine());
+      //  HttpUtils.init(new OkHttpEngine());
 
         // 插件式 换肤框架
-        SkinManager.getInstance().init(this);
+    //    SkinManager.getInstance().init(this);
 
         // 插件式 启动 activity
         HookStartActivityUtil startActivityUtil = new HookStartActivityUtil(this, ProxyActivity.class);

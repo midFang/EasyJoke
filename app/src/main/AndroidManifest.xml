@@ -39,7 +39,7 @@
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <activity android:name=".selectimage.SelectImageActivity" />
-        <activity android:name=".activity.ProxyActivity"></activity>
+        <activity android:name=".activity.ProxyActivity"/>
     </application>
 
 </manifest>

@@ -8,6 +8,12 @@
     tools:context=".selectimage.TestSelectImageActivity">
 
     <Button
+        android:layout_width="match_parent"
+        android:text="安装插件"
+        android:onClick="onClick1"
+        android:layout_height="wrap_content" />
+
+    <Button
         android:onClick="onClick"
         android:text="跳转"
         android:layout_width="match_parent"

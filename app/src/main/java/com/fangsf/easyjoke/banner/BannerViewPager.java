@@ -168,7 +168,8 @@ public class BannerViewPager extends ViewPager {
     /**
      * 管理activity 生命周期方法的回调, 性能优化
      */
-    private Application.ActivityLifecycleCallbacks mActivityLifecycleCallbacks = new SimpleActivityLifecycleCallback() {
+    private Application.ActivityLifecycleCallbacks mActivityLifecycleCallbacks =
+            new SimpleActivityLifecycleCallback() {
 
         @Override
         public void onActivityResumed(Activity activity) {
