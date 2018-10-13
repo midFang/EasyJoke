@@ -5,12 +5,21 @@
     >
 
     <ImageView
+        android:padding="10dp"
         android:id="@+id/ivBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="15dp"
         android:src="@drawable/ic_back" />
+
+    <TextView
+        android:textColor="#333333"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/tv_left_text"
+        android:layout_width="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/tvTitle"

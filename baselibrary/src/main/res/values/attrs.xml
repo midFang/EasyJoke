@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="ToolBar" >
-        <attr name="centerText" format="string" />
-        <attr name="rightIcon" format="integer" />
-        <attr name="rightText" format="string" />
-        <attr name="leftIcon" format="integer" />
-        <attr name="leftText" format="string" />
-        <attr name="finishActivity" format="boolean" />
-        <attr name="defaultTextSize" format="dimension" />
-        <attr name="defaultTextColor" format="color" />
+    <declare-styleable name="ToolBar">
+        <attr name="centerText" format="string" />    <!--中间文字-->
+        <attr name="leftIconMarginLeft" format="dimension" />    <!--左边图片距离左边的距离-->
+        <attr name="rightIconMarginRight" format="dimension" />  <!--右边图表距离右边的距离-->
+        <attr name="leftTextMarginLeft" format="dimension" />   <!--左边文字距离左边的距离-->
+        <attr name="rightTextMarginRight" format="dimension" />   <!--右边文字距离右边距离-->
+        <attr name="rightIcon" format="reference" />  <!--右边的图标-->
+        <attr name="rightText" format="string" />   <!--右边文字-->
+        <attr name="leftIcon" format="reference" />  <!--左边的图标-->
+        <attr name="leftText" format="string" /> <!--左边文字-->
+        <attr name="finishActivity" format="boolean" /> <!--是否需要销毁activity-->
+        <attr name="centerTextSize" format="dimension" /> <!--中间文字的大小-->
+        <attr name="centerTextColor" format="color" /> <!--中间文字的颜色-->
+        <attr name="leftTextSize" format="dimension" /> <!--左边文字的大小-->
+        <attr name="leftTextColor" format="color" /> <!--左边文字颜色-->
+        <attr name="rightTextSize" format="dimension" /> <!--右边文字大小-->
+        <attr name="rightTextColor" format="color" /> <!--右边文字颜色-->
+        <attr name="showLeftIcon" format="boolean" /> <!--是否显示左边的图标-->
+        <attr name="leftTextFinishActivity" format="boolean" /><!--左边的文字是否需要销毁activity-->
     </declare-styleable>
 
 

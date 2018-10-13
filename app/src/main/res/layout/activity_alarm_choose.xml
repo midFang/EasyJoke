@@ -6,20 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".selectimage.SelectImageActivity">
 
-    <com.example.baselibrary.widget.ToolBar
-        android:id="@+id/top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#564d4d"
-        app:centerText="所有图片"
-        app:defaultTextColor="#fff" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rc_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/rl_control"
-        android:layout_below="@id/top_bar"
+
         android:background="#564d4d" />
 
     <RelativeLayout
